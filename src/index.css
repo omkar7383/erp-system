@@ -1,0 +1,333 @@
+@import "tailwindcss";
+
+/* =========================================
+   GLOBAL STYLES
+========================================= */
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  color: #111827;
+  background: #f8fafc;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #f8fafc;
+}
+
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Form controls */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+/* Selection */
+::selection {
+  color: #ffffff;
+  background: #6d28d9;
+}
+
+/* Keyboard focus */
+:focus-visible {
+  outline: 3px solid rgb(124 58 237 / 35%);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   SIDEBAR SCROLLBAR
+========================================= */
+
+.sidebar-nav {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* =========================================
+   LOGIN PAGE — BASE LAYOUT
+========================================= */
+
+.login-page {
+  display: grid;
+
+  /* Desktop layout: 60% left + 40% right */
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  overflow-x: clip;
+}
+
+/* =========================================
+   LEFT BRANDING PANEL
+========================================= */
+
+.login-brand-panel {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  /* Preserve the existing dark branding design */
+  background:
+    radial-gradient(
+      ellipse at 85% 45%,
+      rgb(91 33 182 / 35%) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      135deg,
+      #050923 0%,
+      #10113f 55%,
+      #21105b 100%
+    );
+}
+
+/* Keep branding content inside its panel */
+.login-brand-panel > * {
+  max-width: 100%;
+}
+
+/* =========================================
+   RIGHT LOGIN / ROLE SELECTION PANEL
+========================================= */
+
+.login-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+
+  padding: clamp(24px, 3vw, 48px);
+
+  overflow-wrap: anywhere;
+  background: #ffffff;
+}
+
+/* Prevent oversized inner content */
+.login-form-panel > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Form controls must remain inside the panel */
+.login-form-panel input,
+.login-form-panel textarea,
+.login-form-panel select {
+  max-width: 100%;
+}
+
+/* =========================================
+   ROLE SELECTION CARDS
+========================================= */
+
+.login-form-panel button {
+  max-width: 100%;
+}
+
+/* =========================================
+   LOGIN PAGE — DESKTOP
+========================================= */
+
+@media (min-width: 1024px) {
+  .login-page {
+    /* Exact 60:40 ratio */
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .login-brand-panel,
+  .login-form-panel {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+  }
+
+  .login-brand-panel {
+    padding: clamp(28px, 3.5vw, 64px);
+  }
+
+  .login-form-panel {
+    padding: clamp(24px, 2.5vw, 48px);
+  }
+}
+
+/* =========================================
+   SMALLER LAPTOPS
+========================================= */
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .login-brand-panel {
+    padding: 32px;
+  }
+
+  .login-form-panel {
+    padding: 24px;
+  }
+}
+
+/* =========================================
+   SHORT DESKTOP SCREENS
+========================================= */
+
+@media (max-height: 760px) and (min-width: 1024px) {
+  .login-brand-panel {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .login-form-panel {
+    justify-content: flex-start;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+/* =========================================
+   TABLET LAYOUT
+========================================= */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .login-page {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 100vh;
+  }
+
+  .login-brand-panel,
+  .login-form-panel {
+    min-width: 0;
+    min-height: 100vh;
+  }
+
+  .login-brand-panel {
+    padding: 28px;
+  }
+
+  .login-form-panel {
+    padding: 28px;
+  }
+}
+
+/* =========================================
+   MOBILE LAYOUT
+========================================= */
+
+@media (max-width: 640px) {
+  .login-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .login-brand-panel {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+
+    padding: 28px 24px;
+  }
+
+  .login-form-panel {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+
+    padding: 32px 20px;
+  }
+}
+
+/* =========================================
+   VERY SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 420px) {
+  .login-brand-panel {
+    padding: 24px 20px;
+  }
+
+  .login-form-panel {
+    padding: 28px 16px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
